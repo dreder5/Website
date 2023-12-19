@@ -1,4 +1,42 @@
 body {
     text-align: left;
-    background-color: #ffffff;
+    background-image: linear-gradient( #1a1a1a, #020829);
+    min-width:100vw;
+}
+
+* {
+    box-sizing: border-box
+}
+
+
+
+html, .upperSection {
+    width: 100%;
+    background-color: #1a1a1a;
+}
+
+
+
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
 }
