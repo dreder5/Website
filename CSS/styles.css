@@ -1,7 +1,9 @@
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     text-align: left;
-    background-image: linear-gradient( #1a1a1a, #020829);
-    min-width:100vw;
+    background-image: linear-gradient( #020829, 20%, #1a1a1a);
+    min-width: 100vw;
 }
 
 * {
@@ -13,6 +15,16 @@ body {
 html, .upperSection {
     width: 100%;
     background-color: #1a1a1a;
+}
+
+
+.linksTo {
+    width: 100%;
+    background-color: #353535;
+}
+
+h4{
+    color:white;
 }
 
 
