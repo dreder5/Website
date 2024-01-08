@@ -30,7 +30,16 @@ h4{
 }
 
 
-
+#raster {
+    border: 1px solid white;
+    
+    top: 50%;
+    left: 50%;
+    position: relative;
+    width: 300px;
+    height: 169px;
+    transform: translate(-50%);
+}
 
 /* Slideshow container */
 .slideshow-container {
