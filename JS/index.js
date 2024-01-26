@@ -36,6 +36,9 @@ let gridWidth = document.getElementById("raster").clientWidth; // screen pixels
 let gridHeight = document.getElementById("raster").clientHeight; // screen pixels
 
 
+let rotationSpeed = .3
+
+
 class Vertex {
     vertexData = []
     constructor(_x = 0, _y = 0, _z = 0, _w = 0) {
@@ -56,14 +59,14 @@ class Matrix4x4 {
 }
 
 let PyramidData = [
-// front triangle
-    new Vertex(-1, 0, -1, 1, 0, 0), new Vertex(1, 0, -1, 1, 0, 0), new Vertex( 0, 1, 0, 1, 0, 0 ),
-// right triangle
-    new Vertex(1, 0, -1, 1, 0, 0), new Vertex(1, 0, -1, 1, 0, 0), new Vertex( 0, 1, 0, 1, 0, 0 ),
-// back triangle
-    new Vertex(1, 0, -1, 1, 0, 0), new Vertex(-1, 0, -1, 1, 0, 0), new Vertex( 0, 1, 0, 1, 0, 0 ),
-// left triangle
-    new Vertex(-1, 0, -1, 1, 0, 0), new Vertex(-1, 0, -1, 1, 0, 0), new Vertex(0, 1, 0, 1, 0, 0)
+    // front triangle
+    new Vertex(-1, -1, -1, 1, 0, 0), new Vertex(1, -1, -1, 1, 0, 0), new Vertex(0, 1, 0, 1, 0, 0),
+    // back triangle
+    new Vertex(-1, -1, 1, 1, 0, 0), new Vertex(1, -1, 1, 1, 0, 0), new Vertex(0, 1, 0, 1, 0, 0),
+    // left triangle
+    new Vertex(-1, -1, -1, 1, 0, 0), new Vertex(-1, -1, 1, 1, 0, 0), new Vertex(0, 1, 0, 1, 0, 0),
+    // back triangle
+    new Vertex(1, -1, -1, 1, 0, 0), new Vertex(1, -1, 1, 1, 0, 0), new Vertex(0, 1, 0, 1, 0, 0)
 ]
 
 
@@ -80,10 +83,12 @@ viewMatrix._4x4Data[14] = -1;
 
 let projectionMatrix = new Matrix4x4()
 projectionMatrix._4x4Data[5] = 1 / Math.tan(.5 * 90)
-projectionMatrix._4x4Data[0] = projectionMatrix._4x4Data[5] * 1
+// not sure which [0] I like more
+//projectionMatrix._4x4Data[0] = projectionMatrix._4x4Data[5] * 1    or 
+projectionMatrix._4x4Data[0] = projectionMatrix._4x4Data[5] * (gridHeight /gridWidth)
 projectionMatrix._4x4Data[10] = (10 / (10 - 0.1))
 projectionMatrix._4x4Data[11] = 1
-projectionMatrix._4x4Data[14] = (-(10 * 0.1) / (10 - 0.1))
+projectionMatrix._4x4Data[14] = ((-1 * (10 * 0.1)) / (10 - 0.1))
 
 
 let PyramidWorldMatrix = new Matrix4x4()
@@ -92,23 +97,23 @@ PyramidWorldMatrix._4x4Data[5] = .5
 PyramidWorldMatrix._4x4Data[10] = .5
 PyramidWorldMatrix._4x4Data[12] = 0 // x
 PyramidWorldMatrix._4x4Data[13] = 0 // y
-PyramidWorldMatrix._4x4Data[14] = 0 // z
-PyramidWorldMatrix._4x4Data[15] = .5
+PyramidWorldMatrix._4x4Data[14] = -1 // z
+PyramidWorldMatrix._4x4Data[15] = .2
 
 
 
 
 
 function ConvertNCDtoPixelX(_x) {
-    return (_x + 1) * (gridWidth / 2);
+    return ((_x + 1) * (gridWidth / 2));
 }
 function ConvertNCDtoPixelY(_y) {
-    return (1 - _y) * (gridHeight / 2);
+    return ((1 - _y) * (gridHeight / 2));
 }
 
 
 
-let currentVertexShader = NoVertexShader
+
 
 function VertexTime4X4(_v, matrix4x4) {
     let toReturn = new Vertex(0, 0, 0, 0)
@@ -127,7 +132,33 @@ function VertexTime4X4(_v, matrix4x4) {
 }
 
 
-function NoVertexShader(vertex) {
+
+
+function RotateVertex(passedVertex) {
+    //passedVertex.vertexData[0] += .001;
+
+    let zRotationMatrix = [2]
+    zRotationMatrix[0] = Math.cos(deltaTime * (rotationSpeed / deltaTime) * (Math.PI / 360))
+    zRotationMatrix[1] = Math.sin(deltaTime * (rotationSpeed / deltaTime) * (Math.PI / 360))
+
+
+    tempXA = passedVertex.vertexData[0] * zRotationMatrix[0]; // XA
+    tempXB = passedVertex.vertexData[0] * zRotationMatrix[1]; // XB
+
+    tempYD = passedVertex.vertexData[2] * zRotationMatrix[1]; // YD
+    tempYE = passedVertex.vertexData[2] * zRotationMatrix[0]; // YE
+    passedVertex.vertexData[0] = (tempXA - tempYD);
+    passedVertex.vertexData[2] = (tempXB + tempYE);
+    return passedVertex
+}
+
+
+let currentVertexShader = PyramidVertexShaderRotate
+
+function PyramidVertexShaderRotate(vertex) {
+    vertex = RotateVertex(vertex)
+
+
     w = VertexTime4X4(vertex, PyramidWorldMatrix)
     v = VertexTime4X4(w, viewMatrix)
     toReturn = VertexTime4X4(v, projectionMatrix)
@@ -136,11 +167,20 @@ function NoVertexShader(vertex) {
     toReturn.vertexData[2] = (toReturn.vertexData[2] / toReturn.vertexData[3])
     return toReturn
 }
-function PerspectiveGrid(vertex) {
-    return vertex
-}
 
-function PerspectiveCube(vertex) {
+// default shader
+
+//function PyramidVertexShader(vertex) {
+//    w = VertexTime4X4(vertex, PyramidWorldMatrix)
+//    v = VertexTime4X4(w, viewMatrix)
+//    toReturn = VertexTime4X4(v, projectionMatrix)
+//    toReturn.vertexData[0] = (toReturn.vertexData[0] / toReturn.vertexData[3])
+//    toReturn.vertexData[1] = (toReturn.vertexData[1] / toReturn.vertexData[3])
+//    toReturn.vertexData[2] = (toReturn.vertexData[2] / toReturn.vertexData[3])
+//    return toReturn
+//}
+
+function GridVertexShader(vertex) {
     return vertex
 }
 
@@ -153,12 +193,6 @@ function drawGrid() {
 
 
 function Parametric(x1, y1, x2, y2, color) {
-    x1 = ConvertNCDtoPixelX(x1)
-    x2 = ConvertNCDtoPixelX(x2)
-    y1 = ConvertNCDtoPixelY(y1)
-    y2 = ConvertNCDtoPixelY(y2)
-
-
     var cX = Math.abs(x2 - x1);
     var cY = Math.abs(y2 - y1);
 
@@ -199,10 +233,19 @@ function DrawTriangle(_v1, _v2, _v3, color) {
     _v2 = currentVertexShader(_v2)
     _v3 = currentVertexShader(_v3)
 
+    _v1.vertexData[0] = ConvertNCDtoPixelX(_v1.vertexData[0] / _v1.vertexData[3])
+    _v1.vertexData[1] = ConvertNCDtoPixelY(_v1.vertexData[1] / _v1.vertexData[3])
+    _v1.vertexData[2] = _v1.vertexData[2] / _v1.vertexData[3]
+    _v2.vertexData[0] = ConvertNCDtoPixelX(_v2.vertexData[0] / _v2.vertexData[3])
+    _v2.vertexData[1] = ConvertNCDtoPixelY(_v2.vertexData[1] / _v2.vertexData[3])
+    _v2.vertexData[2] = _v2.vertexData[2] / _v2.vertexData[3]
+    _v3.vertexData[0] = ConvertNCDtoPixelX(_v3.vertexData[0] / _v3.vertexData[3])
+    _v3.vertexData[1] = ConvertNCDtoPixelY(_v3.vertexData[1] / _v3.vertexData[3])
+    _v3.vertexData[2] = _v3.vertexData[2] / _v3.vertexData[3]
 
-    Parametric(_v1.vertexData[0] / _v1.vertexData[3], _v1.vertexData[1] / _v1.vertexData[3], _v2.vertexData[0] / _v1.vertexData[3], _v2.vertexData[1] / _v1.vertexData[3], color)
-    Parametric(_v2.vertexData[0] / _v1.vertexData[3], _v2.vertexData[1] / _v1.vertexData[3], _v3.vertexData[0] / _v1.vertexData[3], _v3.vertexData[1] / _v1.vertexData[3], color)
-    Parametric(_v1.vertexData[0] / _v1.vertexData[3], _v1.vertexData[1] / _v1.vertexData[3], _v3.vertexData[0] / _v1.vertexData[3], _v3.vertexData[1] / _v1.vertexData[3], color)
+    Parametric(_v1.vertexData[0], _v1.vertexData[1], _v2.vertexData[0], _v2.vertexData[1], color)
+    Parametric(_v2.vertexData[0], _v2.vertexData[1], _v3.vertexData[0], _v3.vertexData[1], color)
+    Parametric(_v1.vertexData[0], _v1.vertexData[1], _v3.vertexData[0], _v3.vertexData[1], color)
 }
 
 
@@ -234,9 +277,10 @@ function fillPixel(x,y,color) {
 let deltaTime = 0
 function update() {
     clearRaster();
-    deltaTime = deltaTime + 100;
+    deltaTime = deltaTime + 1;
+    //currentVertexShader = PyramidVertexShader;
     DrawPyramid("green")
-    setTimeout(update, 100); 
+    setTimeout(update, 1); 
 }
 update();
 
