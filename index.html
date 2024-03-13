@@ -22,7 +22,6 @@
 </head>
 
 
-
 <body>
     <div class="upperSection" style="height:128px;width:100vw"></div>
 
@@ -41,13 +40,25 @@
             <!-- p is paragraph of text-->
         </div>
     </div>
-    
 
     <div>
         <!-- raster -->
         <canvas id="raster">
         </canvas>
     </div>
+
+    <div class="buttonContainer">
+
+        <input class="rightButton" type="button" value="Move right" onmousedown="pyramidRight();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
+        <input class="leftButton" type="button" value="Move left" onmousedown="pyramidLeft();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
+
+        <input class="upButton" type="button" value="Move up" onmousedown="pyramidUp()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+        <input class="downButton" type="button" value="Move down" onmousedown="pyramidDown()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+
+        <input class="inButton" type="button" value="Zoom in" onmousedown="pyramidIn()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+        <input class="outButton" type="button" value="Zoom out" onmousedown="pyramidOut()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+    </div>
+
 
 
     <!-- Slideshow container -->

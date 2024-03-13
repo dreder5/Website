@@ -5,8 +5,8 @@ body, html {
     background-image: linear-gradient(#1a1a1a 30%, #353535 70%);
     height: 100%;
     overflow-x: hidden;
+    overflow-y: auto;
 }
-
 
 * {
   margin: 0;
@@ -29,17 +29,17 @@ h4{
     color:white;
 }
 
-
+/*border: 1px solid white;
+*/
 #raster {
-    border: 1px solid white;
-    
-    top: 50%;
-    left: 50%;
-    position: relative;
-    width: 300px;
-    height: 169px;
-    transform: translate(-50%);
+    top: 0;
+    right: 17px;
+    position: fixed;
+    width: 700px;
+    height: 700px;
 }
+
+/* right: 17px; */
 
 /* Slideshow container */
 .slideshow-container {
@@ -52,6 +52,38 @@ h4{
 .fade {
     animation-name: fade;
     animation-duration: 1.5s;
+}
+
+
+.buttonContainer {
+    position: absolute;
+    right: 20%;
+    top: 90%;
+}
+
+.rightButton {
+    position: absolute;
+    transform: translateX(60%) translateY(0);
+}
+.leftButton {
+    position: absolute;
+    transform: translateX(-60%) translateY(0);
+}
+.upButton {
+    position: absolute;
+    transform: translateX(10%) translateY(-180%);
+}
+.downButton {
+    position: absolute;
+    transform: translateX(-3%) translateY(180%);
+}
+.inButton {
+    position: absolute;
+    transform: translateX(150px) translateY(-60%);
+}
+.outButton {
+    position: absolute;
+    transform: translateX(150px) translateY(60%);
 }
 
 @keyframes fade {
