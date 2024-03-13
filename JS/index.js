@@ -31,9 +31,12 @@ function showSlides() {
 
 
 
+let gridWidth = 300
+let gridHeight = 169
+// optimal resolution 
 
-let gridWidth = document.getElementById("raster").clientWidth; // screen pixels
-let gridHeight = document.getElementById("raster").clientHeight; // screen pixels
+//let gridWidth = document.getElementById("raster").clientWidth; // screen pixels
+//let gridHeight = document.getElementById("raster").clientHeight; // screen pixels
 
 
 let rotationSpeed = .3
@@ -81,11 +84,13 @@ viewMatrix._4x4Data[14] = -1;
 
 
 
+
 let projectionMatrix = new Matrix4x4()
 projectionMatrix._4x4Data[5] = 1 / Math.tan(.5 * 90)
 // not sure which [0] I like more
-//projectionMatrix._4x4Data[0] = projectionMatrix._4x4Data[5] * 1    or 
-projectionMatrix._4x4Data[0] = projectionMatrix._4x4Data[5] * (gridHeight /gridWidth)
+projectionMatrix._4x4Data[0] = projectionMatrix._4x4Data[5] * 1    
+// or 
+//projectionMatrix._4x4Data[0] = projectionMatrix._4x4Data[5] * (gridHeight /gridWidth)
 projectionMatrix._4x4Data[10] = (10 / (10 - 0.1))
 projectionMatrix._4x4Data[11] = 1
 projectionMatrix._4x4Data[14] = ((-1 * (10 * 0.1)) / (10 - 0.1))
@@ -269,9 +274,54 @@ function fillPixel(x,y,color) {
 
 
 
+var onRepeat;
+function pyramidRight() {
+    onRepeat = setInterval(function () {
+        if (PyramidWorldMatrix._4x4Data[12] < 1) {
+            PyramidWorldMatrix._4x4Data[12] += .02
+        }
+    }, 50)
+}
+function pyramidLeft() {
+    onRepeat = setInterval(function () {
+        if (PyramidWorldMatrix._4x4Data[12] > -1) {
+            PyramidWorldMatrix._4x4Data[12] -= .02 // y
+        }
+    }, 50)
+}
+function pyramidUp() {
+    onRepeat = setInterval(function () {
+        if (PyramidWorldMatrix._4x4Data[13] < 1) {
+            PyramidWorldMatrix._4x4Data[13] += .02 // y
+        }
+    }, 50)
+}
+function pyramidDown() {
+    onRepeat = setInterval(function () {
+        if (PyramidWorldMatrix._4x4Data[13] > -1) {
+            PyramidWorldMatrix._4x4Data[13] -= .02 // y
+        }
+    }, 50)
+}
 
+function pyramidIn() {
+    onRepeat = setInterval(function () {
+        if (PyramidWorldMatrix._4x4Data[14] < -.75) {
+            PyramidWorldMatrix._4x4Data[14] += .02 // y
+        }
+    }, 50)
+}
+function pyramidOut() {
+    onRepeat = setInterval(function () {
+        if (PyramidWorldMatrix._4x4Data[14] > -1.25) {
+            PyramidWorldMatrix._4x4Data[14] -= .02 // y
+        }
+    }, 50)
+}
 
-
+function ClearRepeat() {
+    clearInterval(onRepeat)
+}
 
 
 let deltaTime = 0
