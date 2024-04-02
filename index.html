@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<!-- MAIN -->
 
 
 <script>
@@ -23,49 +24,59 @@
 
 
 <body>
-    <div class="upperSection" style="height:128px;width:100vw"></div>
+
+    <!--<div class="upperSection" style="height:128px;width:100vw"></div>-->
+    <div class="aboutMe">
+        <h1>Daniel Reder</h1>
+        <br>
+        <div class="aboutMeText">
+            <h2>Languages</h2>
+            Proficiency with C# and C++ . Experience with Python, MySQL, DirectX and HLSL. Light experience with HTML, JavaScript and CSS.
+            <br><br>
+            <h2>Software</h2>
+            Visual Studio, Unreal Engine and Unity.
+            <br><br>
+
+        </div>
 
 
-    <h4>The date today is <span id="date"></span></h4>
+
+    </div>
+
+
+    <!--<h4>The date today is <span id="date"></span></h4>-->
     <!-- headers are just automatically bigger text h1 being the largest h6 being the smallest-->
     <!-- span inserts into a header or paragraph-->
 
-    <div class="image-section">
-        <!-- dive sets where an objects children start-->
-        <div class="section-style">
-            <img src="https://avatars.githubusercontent.com/u/65003639?v=4" width="256" height="154" />
-            <!-- img is an image-->
-            <!-- scr is the path to image-->
-            <p>Github Avatar</p>
-            <!-- p is paragraph of text-->
-        </div>
-    </div>
+    <h1 class="threeDRasterTitle">3D Raster</h1>
 
-    <div>
+    <div class="rasterContainer">
         <!-- raster -->
         <canvas id="raster">
         </canvas>
+
+        <div class="buttonContainer">
+            <input class="rightButton" type="button" value="Move right" onmousedown="pyramidRight();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
+            <input class="leftButton" type="button" value="Move left" onmousedown="pyramidLeft();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
+
+            <input class="upButton" type="button" value="Move up" onmousedown="pyramidUp()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+            <input class="downButton" type="button" value="Move down" onmousedown="pyramidDown()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+
+            <input class="inButton" type="button" value="Zoom in" onmousedown="pyramidIn()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+            <input class="outButton" type="button" value="Zoom out" onmousedown="pyramidOut()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+        </div>
+        <div class="about3DRaster">
+            3D raster implemented using the canvas element of html. Uses NDC coordinates and the Digital differential analyzer algorithm to draw the lines.
+            Mimics standard render piplines by using a vertex shader to modify incoming vertex data via a functionPointer as to not overwrite the original data.
+        </div>
     </div>
 
-    <div class="buttonContainer">
-
-        <input class="rightButton" type="button" value="Move right" onmousedown="pyramidRight();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
-        <input class="leftButton" type="button" value="Move left" onmousedown="pyramidLeft();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
-
-        <input class="upButton" type="button" value="Move up" onmousedown="pyramidUp()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
-        <input class="downButton" type="button" value="Move down" onmousedown="pyramidDown()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
-
-        <input class="inButton" type="button" value="Zoom in" onmousedown="pyramidIn()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
-        <input class="outButton" type="button" value="Zoom out" onmousedown="pyramidOut()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
-    </div>
 
 
-
-    <!-- Slideshow container -->
-    <div class="slideshow-container">
-
-        <!-- Full-width images with number and caption text -->
-        <div class="mySlides fade">
+    <!--Slideshow container-->
+    <!--<div class="slideshow-container">
+     Full-width images with number and caption text
+    <div class="mySlides fade">
             <img src="Images/img1.jpg" style="width:60%">
         </div>
 
@@ -76,25 +87,38 @@
         <div class="mySlides fade">
             <img src="Images/img3.jpg" style="width:60%">
         </div>
-    </div>
+    </div>-->
+
     <br>
 
-
-
-    <div class="linksTo" style="height:128px;width:100vw">
-        <a href="https://github.com/dreder5">
+        <a href="Raster/raster.html">Overview
             <!-- a is for links -->
             <!-- href is the actual link -->
-            <img src="Images/githubLink.jpg" style="width:128px;height:128px">
+            <img src="Images/LI-In-Bug.png" style="width:128px;height:116px">
             <!-- here i have an image attached to my link with the size of 128 by 128 px -->
         </a>
-        <a href="https://archiexist.itch.io/shadowrunner">
-            <!-- a is for links -->
-            <!-- href is the actual link -->
-            <img src="Images/game.png" style="width:128px;height:128px">
-            <!-- here i have an image attached to my link with the size of 128 by 128 px -->
-        </a>
-    </div>
+
+
+        <div class="linksTo" style="height:128px;width:100vw">
+            <a href="https://github.com/dreder5">
+                <!-- a is for links -->
+                <!-- href is the actual link -->
+                <img src="Images/githubLink.jpg" style="width:128px;height:128px">
+                <!-- here i have an image attached to my link with the size of 128 by 128 px -->
+            </a>
+            <a href="https://www.linkedin.com/in/dan-reder-5179032ba/">
+                <!-- a is for links -->
+                <!-- href is the actual link -->
+                <img src="Images/LI-In-Bug.png" style="width:128px;height:116px">
+                <!-- here i have an image attached to my link with the size of 128 by 128 px -->
+            </a>
+            <a href="https://archiexist.itch.io/shadowrunner">
+                <!-- a is for links -->
+                <!-- href is the actual link -->
+                <img src="Images/game.png" style="width:128px;height:128px">
+                <!-- here i have an image attached to my link with the size of 128 by 128 px -->
+            </a>
+        </div>
 </body>
 
 

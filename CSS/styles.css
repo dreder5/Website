@@ -8,9 +8,15 @@ body, html {
     overflow-y: auto;
 }
 
-* {
-  margin: 0;
-  padding: 0;
+*{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+
+div:not(.linksTo) {
+    margin-left: 10px;
 }
 
 
@@ -25,22 +31,17 @@ html, .upperSection {
     background-color: #353535;
 }
 
-h4{
-    color:white;
+
+.aboutMeText{
+    left:50px;
 }
 
-/*border: 1px solid white;
-*/
-#raster {
-    top: 0;
-    right: 17px;
-    position: fixed;
-    width: 700px;
-    height: 700px;
+
+.aboutMe {
 }
+
 
 /* right: 17px; */
-
 /* Slideshow container */
 .slideshow-container {
     max-width: 1000px;
@@ -54,36 +55,67 @@ h4{
     animation-duration: 1.5s;
 }
 
+.threeDRasterTitle {
+    margin-left: 10px;
+}
+
+.rasterContainer {
+    position:center;
+/*    right: 50%;
+    top: 90%;*/
+}
+
+/*border: 1px solid white;
+*/
+#raster {
+/*    top: 0;
+    right: 17px;*/
+    position: relative;
+    width: 700px;
+    height: 700px;
+}
+
+.about3DRaster {
+    max-width: 400px;
+    min-width: 100px;
+    float: right;
+}
 
 .buttonContainer {
-    position: absolute;
-    right: 20%;
-    top: 90%;
+    position: relative;
+    left: 760px;
+    bottom: 60px;
 }
 
 .rightButton {
     position: absolute;
     transform: translateX(60%) translateY(0);
+    color: black;
 }
 .leftButton {
     position: absolute;
     transform: translateX(-60%) translateY(0);
+    color: black;
 }
 .upButton {
     position: absolute;
     transform: translateX(10%) translateY(-180%);
+    color: black;
 }
 .downButton {
     position: absolute;
     transform: translateX(-3%) translateY(180%);
+    color: black;
 }
 .inButton {
     position: absolute;
     transform: translateX(150px) translateY(-60%);
+    color: black;
 }
 .outButton {
     position: absolute;
     transform: translateX(150px) translateY(60%);
+    color: black;
 }
 
 @keyframes fade {

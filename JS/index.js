@@ -1,23 +1,23 @@
-document.getElementById('date').innerHTML = new Date().toDateString();
+//document.getElementById('date').innerHTML = new Date().toDateString();
 // this tells the html file to create a variable called date and sets it to the current date
 
 
-let slideIndex = 0;
-showSlides();
+//let slideIndex = 0;
+//showSlides();
 
-function showSlides() {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {
-        slideIndex = 1
-    }
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 4000); // Change image every 4 seconds
-}
+//function showSlides() {
+//    let i;
+//    let slides = document.getElementsByClassName("mySlides");
+//    for (i = 0; i < slides.length; i++) {
+//        slides[i].style.display = "none";
+//    }
+//    slideIndex++;
+//    if (slideIndex > slides.length) {
+//        slideIndex = 1
+//    }
+//    slides[slideIndex - 1].style.display = "block";
+//    setTimeout(showSlides, 4000); // Change image every 4 seconds
+//}
 
 
 
@@ -109,10 +109,10 @@ PyramidWorldMatrix._4x4Data[15] = .2
 
 
 
-function ConvertNCDtoPixelX(_x) {
+function ConvertNDCtoPixelX(_x) {
     return ((_x + 1) * (gridWidth / 2));
 }
-function ConvertNCDtoPixelY(_y) {
+function ConvertNDCtoPixelY(_y) {
     return ((1 - _y) * (gridHeight / 2));
 }
 
@@ -238,14 +238,14 @@ function DrawTriangle(_v1, _v2, _v3, color) {
     _v2 = currentVertexShader(_v2)
     _v3 = currentVertexShader(_v3)
 
-    _v1.vertexData[0] = ConvertNCDtoPixelX(_v1.vertexData[0] / _v1.vertexData[3])
-    _v1.vertexData[1] = ConvertNCDtoPixelY(_v1.vertexData[1] / _v1.vertexData[3])
+    _v1.vertexData[0] = ConvertNDCtoPixelX(_v1.vertexData[0] / _v1.vertexData[3])
+    _v1.vertexData[1] = ConvertNDCtoPixelY(_v1.vertexData[1] / _v1.vertexData[3])
     _v1.vertexData[2] = _v1.vertexData[2] / _v1.vertexData[3]
-    _v2.vertexData[0] = ConvertNCDtoPixelX(_v2.vertexData[0] / _v2.vertexData[3])
-    _v2.vertexData[1] = ConvertNCDtoPixelY(_v2.vertexData[1] / _v2.vertexData[3])
+    _v2.vertexData[0] = ConvertNDCtoPixelX(_v2.vertexData[0] / _v2.vertexData[3])
+    _v2.vertexData[1] = ConvertNDCtoPixelY(_v2.vertexData[1] / _v2.vertexData[3])
     _v2.vertexData[2] = _v2.vertexData[2] / _v2.vertexData[3]
-    _v3.vertexData[0] = ConvertNCDtoPixelX(_v3.vertexData[0] / _v3.vertexData[3])
-    _v3.vertexData[1] = ConvertNCDtoPixelY(_v3.vertexData[1] / _v3.vertexData[3])
+    _v3.vertexData[0] = ConvertNDCtoPixelX(_v3.vertexData[0] / _v3.vertexData[3])
+    _v3.vertexData[1] = ConvertNDCtoPixelY(_v3.vertexData[1] / _v3.vertexData[3])
     _v3.vertexData[2] = _v3.vertexData[2] / _v3.vertexData[3]
 
     Parametric(_v1.vertexData[0], _v1.vertexData[1], _v2.vertexData[0], _v2.vertexData[1], color)
