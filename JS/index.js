@@ -1,23 +1,101 @@
-document.getElementById('date').innerHTML = new Date().toDateString();
+//document.getElementById('date').innerHTML = new Date().toDateString();
 // this tells the html file to create a variable called date and sets it to the current date
 
 
-let slideIndex = 0;
-showSlides();
+//throw {name : "NotImplementedError", message : "ERROR"}; 
 
-function showSlides() {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {
-        slideIndex = 1
-    }
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 4000); // Change image every 4 seconds
-}
+
+//let slideIndex = 0;
+//showSlides();
+
+//function showSlides() {
+//    let i;
+//    let slides = document.getElementsByClassName("mySlides");
+//    for (i = 0; i < slides.length; i++) {
+//        slides[i].style.display = "none";
+//    }
+//    slideIndex++;
+//    if (slideIndex > slides.length) {
+//        slideIndex = 1
+//    }
+//    slides[slideIndex - 1].style.display = "block";
+//    setTimeout(showSlides, 4000); // Change image every 4 seconds
+//}
+
+////class backgroundCoordinates {
+////    xPos = 0;
+////    yPos = 0;
+////    constructor(x=0,y=0) {
+////        this.xPos = x;
+////        this.yPos = y;
+////    }
+////}
+
+////class backgroundGrid {
+////    gridSystem = [10]
+////    constructor() {
+////        for (var i = 0; i < 10; i++) {
+////            this.gridSystem[i] = new backgroundCoordinates(Math.random() * window.innerWidth, Math.random() * window.innerHeight)
+////        }
+////        //this.gridSystem[0] = new backgroundCoordinates(window.innerWidth * .5, window.innerHeight * .5)
+////    }
+////}
+
+////let backgroundPathing = new backgroundGrid();
+////class backgroundParticle {
+////    nextDestination = 0;
+////    currentXacceleration = 0;
+////    currentYacceleration = 0;
+////    savedIndex = 0
+////    constructor() {
+////        this.nextDestination = new backgroundCoordinates(0, 0);
+////    }
+////    SetNextDestination() {
+////        //this.nextDestination = backgroundPathing.gridSystem[0];
+////        this.nextDestination = backgroundPathing.gridSystem[this.savedIndex = Math.floor(Math.random() * 10)];
+////        console.log(this.nextDestination.xPos)
+////        console.log(this.nextDestination.yPos)
+////        CalculateXandYSpeed();
+////    }
+////}
+
+////let particleEffect = new backgroundParticle();
+////particleEffect.SetNextDestination();
+
+////let particleCounter = 0;
+////function UpdateParticle() {
+////    let particleRef = document.getElementById("particle")
+////    let xCalc = 0;
+////    let yCalc = 0;
+
+////    particleRef.style.top = particleRef.offsetTop + particleEffect.currentYacceleration + "px";
+////    particleRef.style.left = particleRef.offsetLeft + particleEffect.currentXacceleration + "px";
+////    let rectangle = particleRef.getBoundingClientRect();
+
+////    // add a force stop here
+////    if (particleCounter == 200 )
+////    {
+////        console.log("arrived");
+////        particleCounter = 0;
+////        setTimeout(UpdateParticle, Math.random() * 2000 + 1000)
+////        particleEffect.SetNextDestination();
+////    }
+////    else {
+////        setTimeout(UpdateParticle, 1)
+////        particleCounter++;
+////    }
+////}
+
+////function CalculateXandYSpeed() {
+////    let particleRef = document.getElementById("particle")
+////    let rectangle = particleRef.getBoundingClientRect();
+////    let newY = particleEffect.nextDestination.yPos;
+////    let newX = particleEffect.nextDestination.xPos;
+////    particleEffect.currentXacceleration = (newX - rectangle.x) / 200;
+////    particleEffect.currentYacceleration = (newY - rectangle.y) / 200;
+////}
+
+////window.onload = UpdateParticle();
 
 
 
@@ -109,10 +187,10 @@ PyramidWorldMatrix._4x4Data[15] = .2
 
 
 
-function ConvertNCDtoPixelX(_x) {
+function ConvertNDCtoPixelX(_x) {
     return ((_x + 1) * (gridWidth / 2));
 }
-function ConvertNCDtoPixelY(_y) {
+function ConvertNDCtoPixelY(_y) {
     return ((1 - _y) * (gridHeight / 2));
 }
 
@@ -238,14 +316,14 @@ function DrawTriangle(_v1, _v2, _v3, color) {
     _v2 = currentVertexShader(_v2)
     _v3 = currentVertexShader(_v3)
 
-    _v1.vertexData[0] = ConvertNCDtoPixelX(_v1.vertexData[0] / _v1.vertexData[3])
-    _v1.vertexData[1] = ConvertNCDtoPixelY(_v1.vertexData[1] / _v1.vertexData[3])
+    _v1.vertexData[0] = ConvertNDCtoPixelX(_v1.vertexData[0] / _v1.vertexData[3])
+    _v1.vertexData[1] = ConvertNDCtoPixelY(_v1.vertexData[1] / _v1.vertexData[3])
     _v1.vertexData[2] = _v1.vertexData[2] / _v1.vertexData[3]
-    _v2.vertexData[0] = ConvertNCDtoPixelX(_v2.vertexData[0] / _v2.vertexData[3])
-    _v2.vertexData[1] = ConvertNCDtoPixelY(_v2.vertexData[1] / _v2.vertexData[3])
+    _v2.vertexData[0] = ConvertNDCtoPixelX(_v2.vertexData[0] / _v2.vertexData[3])
+    _v2.vertexData[1] = ConvertNDCtoPixelY(_v2.vertexData[1] / _v2.vertexData[3])
     _v2.vertexData[2] = _v2.vertexData[2] / _v2.vertexData[3]
-    _v3.vertexData[0] = ConvertNCDtoPixelX(_v3.vertexData[0] / _v3.vertexData[3])
-    _v3.vertexData[1] = ConvertNCDtoPixelY(_v3.vertexData[1] / _v3.vertexData[3])
+    _v3.vertexData[0] = ConvertNDCtoPixelX(_v3.vertexData[0] / _v3.vertexData[3])
+    _v3.vertexData[1] = ConvertNDCtoPixelY(_v3.vertexData[1] / _v3.vertexData[3])
     _v3.vertexData[2] = _v3.vertexData[2] / _v3.vertexData[3]
 
     Parametric(_v1.vertexData[0], _v1.vertexData[1], _v2.vertexData[0], _v2.vertexData[1], color)
@@ -332,5 +410,7 @@ function update() {
     DrawPyramid("green")
     setTimeout(update, 1); 
 }
+
+
 update();
 
