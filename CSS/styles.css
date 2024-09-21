@@ -1,23 +1,104 @@
 body, html {
+    font-family: Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     text-align: left;
-    background-image: linear-gradient(#1a1a1a 30%, #353535 70%);
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: #0d0d0d;
 }
-
-*{
+/*background-image: linear-gradient(#00011c 20%, #0a0a0a 80%);*/
+* {
     margin: 0;
     padding: 0;
     color: white;
 }
 
 
-div:not(.linksTo) {
-    margin-left: 10px;
+
+@keyframes fadein {
+    0% {
+        opacity: 0
+    }
+    40% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
+
+@-webkit-keyframes fadein {
+    0% {
+        opacity: 0
+    }
+    40% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.columnLeft {
+    Position: relative;
+    float: left;
+    width: 35%;
+}
+
+.columnCenter {
+    Position: relative;
+    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+    animation: fadein 1s;
+    float: left;
+    width: 50%;
+}
+
+.columnRight {
+    Position: relative;
+    float: left;
+    width: 15%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1100px) {
+    .columnLeft {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1380px) {
+    .columnRight {
+        display: none;
+    }
+}
+
+/*no clue what this does find out later*/
+/*.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}*/
+
+
+/*not sure if needed*/
+/*div:not(.linksTo) {
+    margin-left: 10px;
+}*/
 
 
 html, .upperSection {
@@ -26,28 +107,52 @@ html, .upperSection {
 }
 
 
+.linksToContainer {
+    float: right;
+    width: 160px;
+    display: grid;
+    grid-template-areas:
+        "."
+        "one"
+        "two"
+        "three";
+    grid-gap: 32px;
+}
+
+.gridOne {
+    grid-area: one;
+}
+.gridTwo {
+    grid-area: two;
+}
+.gridThree {
+    grid-area: three;
+}
+
 .linksTo {
-    width: 100%;
-    background-color: #353535;
+    width: 128px;
+    height: 128px;
+    -webkit-transition-property: all;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease;
 }
 
-
-.aboutMeText{
-    left:50px;
+.linksTo:hover {
+    transform: scale(1.1)
 }
 
-
-.aboutMe {
+.aboutMeText {
+    word-spacing: 100vw;
+    position: absolute;
+    text-align: center;
+    left: 20px;
+    font-size: 30px;
 }
 
-
-/* right: 17px; */
-/* Slideshow container */
-.slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
+h1 {
+    font-size:50px;
 }
+
 
 /* Fading animation */
 .fade {
@@ -60,70 +165,93 @@ html, .upperSection {
 }
 
 .rasterContainer {
-    position:center;
-/*    right: 50%;
+    position: center;
+    /*    right: 50%;
     top: 90%;*/
 }
 
 /*border: 1px solid white;
 */
 #raster {
-/*    top: 0;
+    /*    top: 0;
     right: 17px;*/
     position: relative;
     width: 700px;
     height: 700px;
 }
 
-.about3DRaster {
-    max-width: 400px;
-    min-width: 100px;
-    float: right;
+.controlButtonContainer {
+    align-items: center;
+    display: grid;
+    grid-template-areas:
+        ". up up ."
+        "left left right right"
+        ". down down .";
+    grid-gap: 20px;
+    margin-right: 20px;
 }
 
-.buttonContainer {
-    position: relative;
-    left: 760px;
-    bottom: 60px;
-}
 
 .rightButton {
-    position: absolute;
-    transform: translateX(60%) translateY(0);
-    color: black;
+    grid-area: right;
 }
 .leftButton {
-    position: absolute;
-    transform: translateX(-60%) translateY(0);
-    color: black;
+    grid-area: left;
 }
 .upButton {
-    position: absolute;
-    transform: translateX(10%) translateY(-180%);
-    color: black;
+    grid-area: up;
 }
-.downButton {
-    position: absolute;
-    transform: translateX(-3%) translateY(180%);
-    color: black;
-}
-.inButton {
-    position: absolute;
-    transform: translateX(150px) translateY(-60%);
-    color: black;
-}
-.outButton {
-    position: absolute;
-    transform: translateX(150px) translateY(60%);
-    color: black;
+/*.buttonContainer  ask andrew what putting this in front does  */ .downButton {
+    grid-area: down;
 }
 
-@keyframes fade {
-    from {
-        opacity: .4
-    }
-
-    to {
-        opacity: 1
-    }
+.sideButtonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
+
+.allButtons {
+    width:90%;
+    Position: absolute;
+    top: 730px;
+    left: 110px;
+    display: flex;
+    align-items: center;
+}
+
+
+.buttonCss {
+    padding: 10px 20px;
+    border: none;
+    background-color: #212121;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.buttonCss:hover {
+    background-color: #285c1c;
+}
+
+
+
+.grid{
+    width:100%;
+    height: 100%;
+}
+
+
+
+.particle {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ffd800;
+    /*    margin: 0 4px;*/
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #a39b00, 0 0 50px #ffd800, 0 0 10px #ffd800;
+}
+

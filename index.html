@@ -24,50 +24,53 @@
 
 
 <body>
+    <!--<div class="grid">  </div>
+    <span> </span>-->
+    <!--<div class="particle" id="particle">  </div>-->
 
-    <!--<div class="upperSection" style="height:128px;width:100vw"></div>-->
-    <div class="aboutMe">
+
+    <div class="columnLeft">
         <h1>Daniel Reder</h1>
         <br>
-        <div class="aboutMeText">
-            <h2>Languages</h2>
-            Proficiency with C# and C++ . Experience with Python, MySQL, DirectX and HLSL. Light experience with HTML, JavaScript and CSS.
-            <br><br>
-            <h2>Software</h2>
-            Visual Studio, Unreal Engine and Unity.
-            <br><br>
+        <!--<div class="upperSection" style="height:128px;width:100vw"></div>-->
+        <div class="aboutMe">
+            <br>
+            <div class="aboutMeText">
+                <h2>Experience</h2>
+
+                C# C++ Python HTML CSS Javascript MySQL Blueprints VisualStudio Unreal Unity Github Perforce Jira Confluence Slack Scrum Agile Devops
+            </div>
+
+
 
         </div>
-
-
-
     </div>
-
 
     <!--<h4>The date today is <span id="date"></span></h4>-->
     <!-- headers are just automatically bigger text h1 being the largest h6 being the smallest-->
     <!-- span inserts into a header or paragraph-->
 
-    <h1 class="threeDRasterTitle">3D Raster</h1>
+    <div class="columnCenter">
 
-    <div class="rasterContainer">
-        <!-- raster -->
-        <canvas id="raster">
-        </canvas>
+        <h1 class="threeDRasterTitle">3D Raster</h1>
 
-        <div class="buttonContainer">
-            <input class="rightButton" type="button" value="Move right" onmousedown="pyramidRight();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
-            <input class="leftButton" type="button" value="Move left" onmousedown="pyramidLeft();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
-
-            <input class="upButton" type="button" value="Move up" onmousedown="pyramidUp()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
-            <input class="downButton" type="button" value="Move down" onmousedown="pyramidDown()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
-
-            <input class="inButton" type="button" value="Zoom in" onmousedown="pyramidIn()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
-            <input class="outButton" type="button" value="Zoom out" onmousedown="pyramidOut()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+        <div class="rasterContainer">
+            <!-- raster -->
+            <canvas id="raster">
+            </canvas>
         </div>
-        <div class="about3DRaster">
-            3D raster implemented using the canvas element of html. Uses NDC coordinates and the Digital differential analyzer algorithm to draw the lines.
-            Mimics standard render piplines by using a vertex shader to modify incoming vertex data via a functionPointer as to not overwrite the original data.
+        <div class="allButtons">
+            <div class="controlButtonContainer">
+                <input class="buttonCss rightButton" type="button" value="Move right" onmousedown="pyramidRight();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
+                <input class="buttonCss leftButton" type="button" value="Move left" onmousedown="pyramidLeft();" onmouseup="ClearRepeat();" onmouseout="ClearRepeat();" />
+                <input class="buttonCss upButton" type="button" value="Move up" onmousedown="pyramidUp()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+                <input class="buttonCss downButton" type="button" value="Move down" onmousedown="pyramidDown()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+            </div>
+
+            <div class="sideButtonContainer">
+                <input class="buttonCss inButton" type="button" value="Zoom in" onmousedown="pyramidIn()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+                <input class="buttonCss outButton" type="button" value="Zoom out" onmousedown="pyramidOut()" onmouseup="ClearRepeat()" onmouseout="ClearRepeat()" />
+            </div>
         </div>
     </div>
 
@@ -88,37 +91,29 @@
             <img src="Images/img3.jpg" style="width:60%">
         </div>
     </div>-->
-
-    <br>
-
-        <a href="Raster/raster.html">Overview
-            <!-- a is for links -->
-            <!-- href is the actual link -->
-            <img src="Images/LI-In-Bug.png" style="width:128px;height:116px">
-            <!-- here i have an image attached to my link with the size of 128 by 128 px -->
-        </a>
-
-
-        <div class="linksTo" style="height:128px;width:100vw">
-            <a href="https://github.com/dreder5">
+    <div class="columnRight">
+        <div class="linksToContainer">
+            <a class="gridOne linksTo" href="https://github.com/dreder5" target="_blank">
                 <!-- a is for links -->
                 <!-- href is the actual link -->
-                <img src="Images/githubLink.jpg" style="width:128px;height:128px">
+                <img src="Images/githubLink.jpg" style="width:inherit;height:inherit">
                 <!-- here i have an image attached to my link with the size of 128 by 128 px -->
             </a>
-            <a href="https://www.linkedin.com/in/dan-reder-5179032ba/">
+            <a class="gridTwo linksTo" href="https://www.linkedin.com/in/dan-reder-5179032ba/" target="_blank">
                 <!-- a is for links -->
                 <!-- href is the actual link -->
-                <img src="Images/LI-In-Bug.png" style="width:128px;height:116px">
+                <img src="Images/LI-In-Bug.png" style="width:inherit;height:inherit">
                 <!-- here i have an image attached to my link with the size of 128 by 128 px -->
             </a>
-            <a href="https://archiexist.itch.io/shadowrunner">
+            <a class="gridThree linksTo" href="https://archiexist.itch.io/shadowrunner" target="_blank">
                 <!-- a is for links -->
                 <!-- href is the actual link -->
-                <img src="Images/game.png" style="width:128px;height:128px">
+                <img src="Images/game.png" style="width:inherit;height:inherit">
                 <!-- here i have an image attached to my link with the size of 128 by 128 px -->
             </a>
         </div>
+    </div>
+
 </body>
 
 
